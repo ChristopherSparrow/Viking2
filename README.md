@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## About this project
 
 This application is built using :
@@ -25,3 +26,7 @@ You can use this as a starting point to create your own Bootstrap 5 based Larave
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+=======
+# viking
+New website for the Viking Pool League
+>>>>>>> c6bf9fb5d346711b6205b443c60b7f33a1265acd
