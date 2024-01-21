@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SeasonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/seasons', [App\Http\Controllers\SeasonController::class, 'index'])->name('seasons');
+Route::get('/seasons', [SeasonController::class, 'index'])->name('seasons');
+Route::get('/seasons/{season}', [SeasonController::class, 'show'])->name('seasons.show');
+Route::get('/seasons/create', [SeasonController::class, 'create'])->name('seasons.create');
+Route::post('/seasons', [SeasonController::class, 'store'])->name('seasons.store');
 
 Auth::routes();
 
