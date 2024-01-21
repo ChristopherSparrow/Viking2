@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/seasons', [App\Http\Controllers\SeasonController::class, 'index'])->name('seasons');
 
 Auth::routes();
 
