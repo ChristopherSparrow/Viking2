@@ -14,4 +14,9 @@ class Season extends Model
         'season_start_date',
         'season_end_date',
     ];
+
+    public function competitions()
+    {
+    return $this->hasMany(Competition::class);
+}
 }

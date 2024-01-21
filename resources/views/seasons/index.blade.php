@@ -7,8 +7,12 @@
         <div class="card">
             <div class="card-header">{{ $season->season_name }}</div>
             <div class="card-body"><a href="/seasons/{{ $season->id }}">{{ $season->season_name }}</a>
-                <p><strong>Start:</strong> {{ \Carbon\Carbon::parse($season->season_start_date)->format('F j, Y') }}<br><strong>End:</strong>{{ \Carbon\Carbon::parse($season->season_end_date)->format('F j, Y') }}<br><br></p>
+                <p>{{ \Carbon\Carbon::parse($season->season_start_date)->format('F j, Y') }} - {{ \Carbon\Carbon::parse($season->season_end_date)->format('F j, Y') }}</p>
                 
+                @foreach ($season->competitions as $competition)
+                    <p><strong>{{ $competition->competitions_name }}</strong><br>Winner - {{ $competition->comp_winner }}<br>Runner Up - {{ $competition->comp_second }}<br></p>
+                 @endforeach
+
             </div>
         </div>
     </div>
