@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-
+<p><a class="nav-link" href="{{ route('seasons.create') }}">Create New Season</a></p>
 @foreach ($seasons as $season)
+
+
+                     
     <div class="col-lg-4">
         <div class="card">
             <div class="card-header">{{ $season->season_name }}</div>

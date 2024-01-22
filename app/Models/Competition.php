@@ -10,6 +10,7 @@ class Competition extends Model
     use HasFactory;
     protected $fillable = [
         'competitions_name',
+        'season_id',
     ];
     public function season()
     {

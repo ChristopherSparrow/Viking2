@@ -12,4 +12,31 @@ class CompetitionController extends Controller
     
         return view('competitions.index', compact('competitions'));
     }
+
+    public function create(Request $request)
+    {
+        $season_id = $request->query('season_id');
+        return view('competitions.create', ['season_id' => $season_id]);
+    }
+    
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'season_id' => 'required|integer|exists:seasons,id', 
+            'competitions_name' => 'required|string|max:255',
+        ]);
+    
+        //dd($validatedData);
+
+        $competition = Competition::create($validatedData);
+    
+        return redirect()->route('seasons.index', $competition->id)->with('success', 'Competition created successfully');
+    }
+    
+
+
+    public function show(Competition $competition)
+    {
+        return view('competitions.show', compact('competition'));
+    }
 }

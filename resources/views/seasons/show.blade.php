@@ -8,6 +8,9 @@
         <p><strong>End Date:</strong> {{ \Carbon\Carbon::parse($season->season_end_date)->format('F j, Y') }}</p>
 
         <h2>Competitions</h2>
+       
+        <p><a href="{{ route('competitions.create', ['season_id' => $season->id]) }}">Add Competitions</a></p>
+        
         @if($season->competitions->count() > 0)
             <ul>
                 @foreach ($season->competitions as $competition)
@@ -21,5 +24,6 @@
         @else
             <p>No competitions for this season yet.</p>
         @endif
+        
     </div>
 @endsection

@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        
-        Schema::table('competitions', function ($table) {
-
-        $table->string('comp_winner');
-        $table->string('comp_second');
-        $table->string('comp_type');
-
+        Schema::table('competitions', function (Blueprint $table) {
+            $table->string('comp_winner')->nullable()->change();
+            $table->string('comp_second')->nullable()->change();
+            $table->string('comp_type')->nullable()->change();
         });
     }
 
@@ -26,7 +23,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('competitions', function ($table) {
+        Schema::table('competitions', function (Blueprint $table) {
             //
         });
     }

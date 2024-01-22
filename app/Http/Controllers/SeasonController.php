@@ -13,6 +13,11 @@ class SeasonController extends Controller
         return view('seasons.index', compact('seasons'));
     }
 
+    public function create()
+    {
+
+        return view('seasons.create');
+    }
     public function store(Request $request)
     {
         // Validate the request data
@@ -29,10 +34,7 @@ class SeasonController extends Controller
         return redirect()->route('seasons.show', $season->id)->with('success', 'Season created successfully');
     }
 
-    public function create()
-    {
-        return view('seasons.create');
-    }
+
 
     public function show(Season $season)
     {
