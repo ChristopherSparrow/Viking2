@@ -27,13 +27,15 @@ Route::get('/seasons/{season}', [SeasonController::class, 'show'])->name('season
 Route::get('/seasons/{season}/edit', [SeasonController::class, 'edit'])->name('seasons.edit');
 Route::patch('/seasons/{season}', [SeasonController::class, 'update'])->name('seasons.update');
 Route::delete('/seasons/{season}', [SeasonController::class, 'destroy'])->name('seasons.destroy');
+
 Route::get('/competitions', [CompetitionController::class, 'index'])->name('competitions.index');
 Route::get('/competitions/create/', [CompetitionController::class, 'create'])->name('competitions.create');
 Route::post('/competitions', [CompetitionController::class, 'store'])->name('competitions.store');
 Route::get('/competitions/{competition}', [CompetitionController::class, 'show'])->name('competitions.show');
-Route::get('/competitions/{competition}/edit', [CompetitionController::class, 'edit'])->name('competitions.edit');
-Route::patch('/competitions/{competition}', [CompetitionController::class, 'update'])->name('competitions.update');
-Route::delete('/competitions/{competition}', [CompetitionController::class, 'destroy'])->name('competitions.destroy');
+Route::get('/seasons/{season}/competitions/{competition}/edit', [CompetitionController::class, 'edit'])->name('competitions.edit');
+
+Route::delete('/seasons/{season}/competitions/{competition}', [CompetitionController::class,'destroy'])->name('competitions.destroy');
+Route::put('/seasons/{season}/competitions/{competition}', [CompetitionController::class, 'update'])->name('competitions.update');
 
 Auth::routes();
 
