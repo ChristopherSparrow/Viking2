@@ -18,5 +18,9 @@ class Season extends Model
     public function competitions()
     {
     return $this->hasMany(Competition::class);
-}
+}   
+    public function teams()
+    {
+    return $this->hasMany(Team::class);
+    }
 }

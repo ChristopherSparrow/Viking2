@@ -14,34 +14,37 @@ class CompetitionController extends Controller
         return view('competitions.index', compact('competitions'));
     }
 
-    public function create(Request $request)
+    public function create($seasonId)
     {
-        $season_id = $request->query('season_id');
-        return view('competitions.create', ['season_id' => $season_id]);
+        $season = Season::findOrFail($seasonId);
+
+        //dd($seasonId);
+        return view('competitions.create', compact('season'));
     }
     
-    public function store(Request $request)
+    public function store(Request $request, $seasonId)
     {
         $validatedData = $request->validate([
-            'season_id' => 'required|integer|exists:seasons,id', 
             'competitions_name' => 'required|string|max:255',
-            'comp_winner' => 'string|max:255',
-            'comp_second' => 'string|max:255',
+            'comp_type' => 'string|max:255',
+
+
         ]);
     
-       // dd($validatedData);
+        //dd($validatedData);
 
-        $competition = Competition::create($validatedData);
+        $validatedData['season_id'] = $seasonId;
+        Competition::create($validatedData);
+
+        return redirect()->route('seasons.show', ['seasonId' => $seasonId])->with('success', 'Team created successfully');
+   }
     
-        return redirect()->route('seasons.index', $competition->id)->with('success', 'Competition created successfully');
-    }
-    
-
-
-    public function show(Competition $competition)
-    {
-        return view('competitions.show', compact('competition'));
-    }
+   public function show($seasonId, $competitionId)
+   {
+       $season = Season::findOrFail($seasonId);
+       $competition = Competition::findOrFail($competitionId);
+       return view('competitions.show', compact('season', 'competition'));
+   }
 
 
     public function edit($seasonId, $competitionId)
@@ -59,26 +62,45 @@ class CompetitionController extends Controller
     $competition = Competition::findOrFail($competitionId);
 
     // Validate and update competition details
-    $request->validate([
+     $request->validate([
+      
         'competitions_name' => 'required|string|max:255',
+        'comp_winner' => 'string|max:255',
+        'comp_second' => 'string|max:255',
+        'comp_type' => 'string|max:255',
+
         // Add other validation rules for your fields
     ]);
 
-    $competition->update($request->all());
+    $request['season_id'] = $seasonId;
+ $competition->update($request->only([
+    'season_id',
+    'competitions_name',
+    'comp_winner',
+    'comp_second',
+    'comp_type',
+    // Add other fields as needed
+]));
 
-    return redirect()->route('seasons.show', ['season' => $season->id])
+
+    return redirect()->route('seasons.show', ['seasonId' => $season->id])
         ->with('success', 'Competition updated successfully');
 }
 
-public function destroy($seasonId, $competitionId)
+
+
+
+
+
+public function destroy($season, $competitionId)
 {
-    $season = Season::findOrFail($seasonId);
+    $season = Season::findOrFail($season);
     $competition = Competition::findOrFail($competitionId);
 
     // Delete the competition
     $competition->delete();
 
-    return redirect()->route('seasons.show', ['season' => $season->id])
+    return redirect()->route('seasons.show', ['seasonId' => $season->id])
         ->with('success', 'Competition deleted successfully');
 }
 
