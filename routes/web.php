@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SeasonController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\PlayerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,14 @@ Route::get('/seasons/{seasonId}/teams/{teamId}', [TeamController::class, 'show']
 Route::get('/seasons/{seasonId}/teams/{teamId}/edit', [TeamController::class, 'edit'])->name('teams.edit');
 Route::put('/seasons/{seasonId}/teams/{teamId}/update', [TeamController::class, 'update'])->name('teams.update');
 Route::delete('/seasons/{seasonId}/teams/{teamId}/destroy', [TeamController::class, 'destroy'])->name('teams.destroy');
+
+Route::get('/seasons/{seasonId}/players', [PlayerController::class, 'index'])->name('players.index');
+Route::get('/seasons/{seasonId}/players/create', [PlayerController::class, 'create'])->name('players.create');
+Route::post('/seasons/{seasonId}/players/store', [PlayerController::class, 'store'])->name('players.store');
+Route::get('/seasons/{seasonId}/players/{playerId}', [PlayerController::class, 'show'])->name('players.show');
+Route::get('/seasons/{seasonId}/players/{playerId}/edit', [PlayerController::class, 'edit'])->name('players.edit');
+Route::put('/seasons/{seasonId}/players/{playerId}/update', [PlayerController::class, 'update'])->name('players.update');
+Route::delete('/seasons/{seasonId}/players/{playerId}/destroy', [PlayerController::class, 'destroy'])->name('players.destroy');
 
 // ...
 

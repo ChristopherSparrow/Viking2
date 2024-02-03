@@ -5,28 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Team extends Model
+class Player extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'team_name',
+        'player_name',
         'season_id',
-        'team_captain',
-        'team_vice_captain',
-        'team_captain_no',
-        'team_vice_captain_no',
+        'team_id',
     ];
-
-
 
     public function season()
     {
         return $this->belongsTo(Season::class);
     }
-
-    public function players()
+    public function team()
     {
-    return $this->hasMany(Player::class);
+        return $this->belongsTo(Team::class);
     }
 }

@@ -24,10 +24,10 @@
                         <input type="text" name="competitions_name" required value="{{ $competition->competitions_name }}"></p>
 
                         <p><label for="comp_winner">Winner:</label>
-                        <input type="text" name="comp_winner" value="{{ $competition->comp_winner }}"></p>
+                        <input type="text" name="comp_winner" required value="{{ $competition->comp_winner }}"></p>
 
                         <p><label for="comp_second">Runner Up:</label>
-                        <input type="text" name="comp_second" value="{{ $competition->comp_second }}"></p>
+                        <input type="text" name="comp_second" required value="{{ $competition->comp_second }}"></p>
 
                         <p><label for="comp_type">Type</label>
                             <select name="comp_type" value="{{ $competition->comp_type }}">

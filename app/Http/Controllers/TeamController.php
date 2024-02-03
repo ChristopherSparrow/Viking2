@@ -17,7 +17,6 @@ class TeamController extends Controller
     public function create($seasonId)
     {
         $season = Season::findOrFail($seasonId);
-     //dd($seasonId);
         return view('teams.create', compact('season'));
     }
 

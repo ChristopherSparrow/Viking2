@@ -11,9 +11,8 @@
         <div class="card">
                 <div class="card-header">{{ $team->team_name }}</div>
                 <div class="card-body">
-                    <p>Captain: {{ $team->team_captain }}<br>
-                    Vice Captain: {{ $team->team_vice_captain }}</p>
-
+                    <p>Captain: {{ $team->team_captain }} - {{ $team->team_captain_no }}<br>
+                    Vice Captain: {{ $team->team_vice_captain }} - {{ $team->team_vice_captain_no }}</p>
                 </div>
             <div class="card-header"><a href="{{ route('teams.edit', ['seasonId' => $season->id, 'teamId' => $team->id]) }}">Edit / Delete</a></div>
         </div>
