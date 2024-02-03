@@ -2,7 +2,7 @@
 
 @section('content')
 
-<p><a href="{{ route('home') }}">Home</a> / <a href="{{ route('seasons.index') }}">All Seasons</a> / <a href="/seasons/{{ $season->id }}">{{ $season->season_name }}</a> / All Teams</p>
+<p><a href="{{ url('/') }}">Home</a> / <a href="{{ route('seasons.index') }}">All Seasons</a> / <a href="/seasons/{{ $season->id }}">{{ $season->season_name }}</a> / All Teams</p>
 <h1>Teams for {{ $season->season_name }}</h1>
 <p><a href="{{ route('teams.create', ['seasonId' => $season->id]) }}">Add New Team</a></p>
 <div class="row">

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<p><a href="{{ route('home') }}">Home</a> / <a href="{{ route('seasons.index') }}">All Seasons</a> / Add</p>
+<p><a href="{{ url('/') }}">Home</a> / <a href="{{ route('seasons.index') }}">All Seasons</a> / Add</p>
 <h1>Add new Season</h1>
 <div class="row">
     <div class="col-lg-4 mb-4">
