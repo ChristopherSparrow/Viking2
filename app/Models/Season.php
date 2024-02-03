@@ -28,4 +28,9 @@ class Season extends Model
     {
     return $this->hasMany(Player::class);
     }
+
+    public function fixtures()
+    {
+    return $this->hasMany(Fixture::class);
+    }
 }

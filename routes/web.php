@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FixtureController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SeasonController;
 use App\Http\Controllers\CompetitionController;
@@ -58,7 +59,7 @@ Route::get('/seasons/{seasonId}/players/{playerId}/edit', [PlayerController::cla
 Route::put('/seasons/{seasonId}/players/{playerId}/update', [PlayerController::class, 'update'])->name('players.update');
 Route::delete('/seasons/{seasonId}/players/{playerId}/destroy', [PlayerController::class, 'destroy'])->name('players.destroy');
 
-// ...
+Route::get('/fixtures/{competitionId}/', [FixtureController::class, 'index'])->name('fixtures.index');
 
 
 
