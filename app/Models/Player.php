@@ -5,19 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Competition extends Model
+class Player extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        
-        'competitions_name',
-        'comp_winner',
-        'comp_second',
-        'comp_type',
+        'player_name',
         'season_id',
+        'team_id',
     ];
+
     public function season()
     {
         return $this->belongsTo(Season::class);
+    }
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
     }
 }

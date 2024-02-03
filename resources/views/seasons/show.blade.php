@@ -2,24 +2,42 @@
 
 @section('content')
 
-<p><a href="{{ route('home') }}">Home</a> / <a href="{{ route('seasons.index') }}">All Seasons</a> / {{ $season->season_name }}</p>
+<p><a href="{{ url('/') }}">Home</a> / <a href="{{ route('seasons.index') }}">All Seasons</a> / {{ $seasonId->season_name }}</p>
 
-<h1>{{ $season->season_name }}</h1>
+<h1>{{ $seasonId->season_name }}</h1>
 
-<p>{{ \Carbon\Carbon::parse($season->season_start_date)->format('F j, Y') }} - {{ \Carbon\Carbon::parse($season->season_end_date)->format('F j, Y') }}</p>
-
-<p><a href="{{ route('competitions.create', ['season_id' => $season->id]) }}">Add Competitions</a></p>
-@if($season->competitions->count() > 0)
+<p>{{ \Carbon\Carbon::parse($seasonId->season_start_date)->format('F j, Y') }} - {{ \Carbon\Carbon::parse($seasonId->season_end_date)->format('F j, Y') }}</p>
 <div class="row">
-    @foreach ($season->competitions as $competition)
-    <div class="col-lg-4">
+    <div class="col-lg-12 mb-4">
         <div class="card">
-            <div class="card-header">{{ $competition->competitions_name }}</div>
+            <div class="card-header">ADMIN</div>
             <div class="card-body">
-                <p><a href="{{ route('competitions.edit', ['season' => $season->id, 'competition' => $competition->id]) }}">Edit/Delete</a></p>
-                <p>Winner - {{ $competition->comp_winner }}<br>Runner Up - {{ $competition->comp_second }}<br></p>
+                <p><a href="{{ route('competitions.create', ['seasonId' => $seasonId->id]) }}">Add Competitions</a> | <a href="{{ route('teams.index',['seasonId' => $seasonId->id])}}">Edit Teams</a> | <a href="{{ route('players.index',['seasonId' => $seasonId->id])}}">Edit Players</a></p>
             </div>
         </div>
+    </div>
+
+</div>
+@if($seasonId->competitions->count() > 0)
+<div class="row">
+    @foreach ($seasonId->competitions->sortBy('comp_type') as $competition)
+    <div class="col-lg-4 mb-4">
+        <div class="card">
+            <div class="card-header">{{ $competition->competitions_name }} | <a href="{{ route('competitions.edit', ['seasonId' => $seasonId->id, 'competitionId' => $competition->id]) }}">Edit / Delete</a></div>
+            <div class="card-body">
+                <p></p>
+                <p>Winner - {{ $competition->comp_winner }}<br>Runner Up - {{ $competition->comp_second }}<br><br>
+                    @if (in_array($competition->comp_type, [1, 2]))
+                    Fixtures / Results<br>Table<br><a href="{{ route('teams.index',['seasonId' => $seasonId->id])}}">View Teams</a><br>
+                    @endif
+                    @if (in_array($competition->comp_type, [3,4,5]))
+                    Fixtures / Results</a><br><a href="{{ route('players.index',['seasonId' => $seasonId->id])}}">View Players</a><br>
+                    @endif
+
+                </p>
+            </div>
+        </div>
+
     </div>
     @endforeach
     @else

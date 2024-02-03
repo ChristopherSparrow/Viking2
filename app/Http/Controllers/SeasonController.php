@@ -15,7 +15,6 @@ class SeasonController extends Controller
 
     public function create()
     {
-
         return view('seasons.create');
     }
     public function store(Request $request)
@@ -36,9 +35,9 @@ class SeasonController extends Controller
 
 
 
-    public function show(Season $season)
+    public function show(Season $seasonId)
     {
-        return view('seasons.show', compact('season'));
+        return view('seasons.show', compact('seasonId'));
     }
 
 }

@@ -1,27 +1,43 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h1>Add new Competition</h1>
-        <h2>Words in here</h2>
-        <form method="post" action="{{ route('competitions.store') }}">
-            @csrf
-            <input type="hidden" name="season_id" value="{{ $season_id }}">
 
+<p><a href="{{ url('/') }}">Home</a> / <a href="{{ route('seasons.index') }}">All Seasons</a> / <a href="/seasons/{{ $season->id }}">{{ $season->season_name}}</a> / Add</p>
 
+<h1>Add new Competition</h1>
 
-            <label for="competitions_name">Competition Name:</label>
-            <input type="text" name="competitions_name" required>
+<div class="row">
+  <form method="post" action="{{ route('competitions.store', ['seasonId' => $season->id]) }}">
+    @csrf
+    <div class="col-lg-4 mb-4">
+        <div class="card">
+          <div class="card-header">Edit</div>
+          <div class="card-body">
+            <input type="hidden" name="season_id" value="{{ $season->id }}">
 
-            <label for="comp_winner">Winner:</label>
-            <input type="text" name="comp_winner" >
+            <p><label for="competitions_name">Competition Name:</label>
+            <input type="text" name="competitions_name" required></p>
 
-            <label for="comp_second">Runner Up:</label>
-            <input type="text" name="comp_second" >
+            <p><label for="comp_winner">Winner:</label>
+            <input type="text" name="comp_winner" value=""></p>
 
-            <button type="submit">Add Competition</button>
-        </form>
+            <p><label for="comp_second">Runner Up:</label>
+            <input type="text" name="comp_second" value="" ></p>
 
+            <p><label for="comp_type">Type</label>
+            <select name="comp_type">
+                <option value="">Choose</option>
+                <option value="1">League</option>
+                <option value="2">Team Knock Out</option>
+                <option value="3">Singles / Plate</option>
+                <option value="4">Over 45s</option>
+                <option value="5">Pairs</option>
+              </select></p>
 
+            <p><button type="submit">Add Competition</button></p>
+          </div>
+        </div>
     </div>
+  </form>
+
 @endsection

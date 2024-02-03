@@ -2,7 +2,7 @@
 
 @section('content')
 
-<p><a href="{{ route('home') }}">Home</a> / All Seasons</p>
+<p><a href="{{ url('/') }}">Home</a> / All Seasons</p>
 <h1>All Seasons</h1>
 
 <p><a href="{{ route('seasons.create') }}">Create New Season</a></p>
@@ -12,7 +12,7 @@
 
 
                      
-    <div class="col-lg-4">
+    <div class="col-lg-4 mb-4">
         <div class="card">
             <div class="card-header">{{ $season->season_name }}</div>
             <div class="card-body">
