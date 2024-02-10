@@ -5,6 +5,7 @@ use App\Http\Controllers\SeasonController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\FixtureController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,8 +59,14 @@ Route::get('/seasons/{seasonId}/players/{playerId}/edit', [PlayerController::cla
 Route::put('/seasons/{seasonId}/players/{playerId}/update', [PlayerController::class, 'update'])->name('players.update');
 Route::delete('/seasons/{seasonId}/players/{playerId}/destroy', [PlayerController::class, 'destroy'])->name('players.destroy');
 
-// ...
+Route::get('/fixtures/{seasonId}/{competitionId}/', [FixtureController::class, 'index'])->name('fixtures.index');
+Route::get('/fixtures/table/{seasonId}/{competitionId}/', [FixtureController::class, 'table'])->name('fixtures.table');
 
+Route::get('/fixtures/{seasonId}/{competitionId}/{date}/edit', [FixtureController::class, 'edit'])->name('fixtures.edit');
+Route::put('/fixtures/{seasonId}/{competitionId}/{date}', [FixtureController::class, 'update'])->name('fixtures.update');
+Route::delete('/fixtures/{seasonId}/{competitionId}/{date}', [FixtureController::class, 'destroy'])->name('fixtures.destroy');
+Route::get('/fixtures/create/{seasonId}/{competitionId}', [FixtureController::class, 'create'])->name('fixtures.create');
+Route::post('/fixtures/store/{seasonId}/{competitionId}', [FixtureController::class, 'store'])->name('fixtures.store');
 
 
 

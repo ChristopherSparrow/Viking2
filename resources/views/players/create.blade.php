@@ -16,9 +16,7 @@
                 <label for="player_name">Name:</label>
                 <input type="text" name="player_name" class="form-control" required>
             </div>
-            <pre>
-                <?php var_dump($teams); ?>
-            </pre>
+
             <select name="team_id" class="form-control">
                 <option value="" selected>Select Team</option>
                 @foreach($teams as $key => $value)

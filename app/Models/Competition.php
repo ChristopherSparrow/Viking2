@@ -20,4 +20,9 @@ class Competition extends Model
     {
         return $this->belongsTo(Season::class);
     }
+
+    public function fixtures()
+    {
+    return $this->hasMany(Fixture::class);
+    }
 }

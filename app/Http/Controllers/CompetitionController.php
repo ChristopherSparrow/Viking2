@@ -17,8 +17,6 @@ class CompetitionController extends Controller
     public function create($seasonId)
     {
         $season = Season::findOrFail($seasonId);
-
-        //dd($seasonId);
         return view('competitions.create', compact('season'));
     }
     
