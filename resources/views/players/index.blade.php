@@ -16,7 +16,7 @@
                 <div class="card-body">
                     <p>
                         @foreach($players->where('team_id', $team->id)->sortby('player_name') as $player)
-                        <a href="{{ route('players.edit', ['seasonId' => $season->id, 'playerId' => $player->id]) }}">{{ $player->player_name }}<br>
+                        <a href="{{ route('players.edit', ['seasonId' => $season->id, 'playerId' => $player->id]) }}">{{ $player->player_name }}</a><br>
                         @endforeach
                     </p>
                 </div>

@@ -27,8 +27,14 @@
             <div class="card-body">
                 <p></p>
                 <p>Winner - {{ $competition->comp_winner }}<br>Runner Up - {{ $competition->comp_second }}<br><br>
-                    @if (in_array($competition->comp_type, [1, 2]))
-                    <a href="{{ route('fixtures.index',['competitionId' => $competition->id])}}">Fixtures / Results</a><br>Table<br><a href="{{ route('teams.index',['seasonId' => $seasonId->id])}}">View Teams</a><br>
+                    @if (in_array($competition->comp_type, [1]))
+                    <a href="{{ route('fixtures.index', ['competitionId' => $competition->id, 'seasonId' => $seasonId->id]) }}">Fixtures / Results</a><br>
+                    <a href="{{ route('fixtures.table', ['competitionId' => $competition->id, 'seasonId' => $seasonId->id]) }}">Table</a><br>
+                    <a href="{{ route('teams.index',['seasonId' => $seasonId->id])}}">View Teams</a><br>
+                    @endif
+                    @if (in_array($competition->comp_type, [2]))
+                    <a href="{{ route('fixtures.index', ['competitionId' => $competition->id, 'seasonId' => $seasonId->id]) }}">Fixtures / Results</a><br>
+                    <a href="{{ route('teams.index',['seasonId' => $seasonId->id])}}">View Teams</a><br>
                     @endif
                     @if (in_array($competition->comp_type, [3,4,5]))
                     Fixtures / Results</a><br><a href="{{ route('players.index',['seasonId' => $seasonId->id])}}">View Players</a><br>

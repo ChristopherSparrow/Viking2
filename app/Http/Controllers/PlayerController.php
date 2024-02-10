@@ -29,7 +29,7 @@ class PlayerController extends Controller
     public function create($seasonId)
     {
         $season = Season::findOrFail($seasonId);
-        $teams = Team::pluck('team_name', 'id');
+        $teams = Team::orderBy('team_name')->pluck('team_name', 'id');
         return view('players.create', compact('season','teams'));
     }
 
