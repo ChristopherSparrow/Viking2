@@ -118,7 +118,6 @@ class FixtureController extends Controller
         return redirect()->route('fixtures.index', ['seasonId' => $seasonId, 'competitionId' => $competitionId]);
     }
 
-// FixtureController.php
 
 public function create($seasonId, $competitionId)
 {

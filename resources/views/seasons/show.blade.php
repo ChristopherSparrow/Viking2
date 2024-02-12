@@ -37,7 +37,8 @@
                     <a href="{{ route('teams.index',['seasonId' => $seasonId->id])}}">View Teams</a><br>
                     @endif
                     @if (in_array($competition->comp_type, [3,4,5]))
-                    Fixtures / Results</a><br><a href="{{ route('players.index',['seasonId' => $seasonId->id])}}">View Players</a><br>
+                    <a href="{{ route('cups.index', ['competitionId' => $competition->id, 'seasonId' => $seasonId->id]) }}">Fixtures / Results</a><br>
+                    <a href="{{ route('players.index',['seasonId' => $seasonId->id])}}">View Players</a><br>
                     @endif
 
                 </p>
