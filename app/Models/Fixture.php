@@ -22,6 +22,7 @@ class Fixture extends Model
     'home_score',
     'away_score',
     'location',
+    'comp_round',
     ];
 
     public function season()
@@ -45,5 +46,9 @@ class Fixture extends Model
         return $this->belongsTo(Team::class, 'away_team');
     }
 
+    public function round()
+    {
+    return $this->hasMany(Round::class);
+    }
 
 }

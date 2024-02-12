@@ -6,6 +6,7 @@ use App\Models\Season;
 use App\Models\Fixture;
 use App\Models\Team;
 use App\Models\Player;
+use App\Models\Round;
 use Illuminate\Http\Request;
 
 class CupController extends Controller
@@ -14,13 +15,15 @@ class CupController extends Controller
     {
         $competitions = Competition::pluck('competitions_name', 'id');
         $comp_type = Competition::pluck('comp_type', 'id');
+        $rounds = Round::pluck('round_name', 'id');
 
+    
         $teams = Team::orderBy('team_name')->pluck('team_name', 'id');
         $players = Player::orderBy('player_name')->pluck('player_name', 'id');
 
         $seasons = Season::where('id', $seasonId)->first();
         $fixtures = Fixture::where('competition_id', $competitionId)->get();
-        return view('cups.index', compact('fixtures', 'competitionId', 'teams', 'competitions', 'seasons','comp_type','players'));
+        return view('cups.index', compact('fixtures', 'rounds','competitionId', 'teams', 'competitions', 'seasons','comp_type','players'));
     }
 
     public function create($seasonId, $competitionId)
@@ -28,9 +31,10 @@ class CupController extends Controller
         $teams = Team::orderBy('team_name')->pluck('team_name', 'id');
         $players = Player::orderBy('player_name')->pluck('player_name', 'id');
         $date = today();
+        $rounds = Round::pluck('round_name', 'id');
         $competition = Competition::findorfail($competitionId);
         $season = Season::findOrFail($seasonId);
-        return view('cups.create', compact('season', 'competition', 'competitionId', 'teams', 'date', 'players'));
+        return view('cups.create', compact('season', 'rounds','competition', 'competitionId', 'teams', 'date', 'players'));
 }
 
     public function store(Request $request, $seasonId, $competitionId)
@@ -44,6 +48,7 @@ class CupController extends Controller
         $fixture->home_score = $request->input('home_score');
         $fixture->away_score = $request->input('away_score');
         $fixture->location = $request->input('location');
+        $fixture->comp_round = $request->input('comp_round');
         
         $fixture->save();
 

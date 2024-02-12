@@ -9,12 +9,26 @@
 <a href="{{ route('cups.create', ['seasonId' => $seasons->id, 'competitionId' => $competitionId]) }}" class="btn btn-primary">Create Fixture</a>
     @if($fixtures->count() > 0)
     <div class="row">
-        @foreach ($comp_type[$competitionId]== 1 ? $fixtures->sortBy('date')->groupBy('date') : $fixtures->sortByDesc('date')->groupBy('date') as $date => $groupedFixtures)
-
+        @foreach ($comp_type[$competitionId] == 1 ? $fixtures->sortBy('date')->groupBy('date') : $fixtures->sortByDesc('date')->groupBy('date') as $date => $groupedFixtures)
+         @php
+        // Fetching the comp_round for the first fixture in the grouped fixtures
+        $firstFixture = $groupedFixtures->first();
+        $comp_round = $firstFixture->comp_round; // Replace 'comp_round_date' with the actual column name
+        @endphp
     
                 <div class="col-lg-4 mb-4">
                     <div class="card">
-                        <div class="card-header">{{ \Carbon\Carbon::parse($date)->format('F j, Y') }}
+                        <div class="card-header">{{ \Carbon\Carbon::parse($date)->format('F j, Y') }} 
+                            
+                            
+                            @if(isset($rounds[$comp_round]))
+                   -  {{ $rounds[$comp_round] }}
+                @else
+                    
+                @endif
+                       
+
+                            
                             <div class="float-right">
                                 <a href="{{ route('cups.edit', ['seasonId' => $seasons->id, 'competitionId' => $competitionId, 'date' => $date]) }}" class="btn btn-primary btn-sm">Edit</a>
 
@@ -29,6 +43,7 @@
                         <div class="card-body">
                             <table class="table">
                                 @foreach ($groupedFixtures as $fixture)
+                               
                                 @if($fixture->location )
                                     <tr>
                                         <td style="border: none;">{{ $players[$fixture->home_player_1] }}<br>

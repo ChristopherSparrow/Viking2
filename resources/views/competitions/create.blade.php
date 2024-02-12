@@ -27,11 +27,10 @@
             <p><label for="comp_type">Type</label>
             <select name="comp_type">
                 <option value="">Choose</option>
-                <option value="1">League</option>
-                <option value="2">Team Knock Out</option>
-                <option value="3">Singles / Plate</option>
-                <option value="4">Over 45s</option>
-                <option value="5">Pairs</option>
+                <option value="1">Leagues</option>
+                <option value="2">Team cups</option>
+                <option value="3">Individual cups</option>
+                <option value="4">Two player cups</option>
               </select></p>
 
             <p><button type="submit">Add Competition</button></p>

@@ -11,14 +11,23 @@
 
     @csrf
 
-    <!-- Add your form fields here -->
-
-    <p><label for="date">Start Date:</label>
-
-        <input type="date" name="date" id="date" required></p>
-
+    <p>
+        <label for="date">Start Date:</label>
+        <input class="form-control" type="date" name="date" id="date" required>
+    </p>
+    <p>
+        <div class="form-group">
+            <label for="comp_round">Competition Round</label>
+            <select class="form-control" id="comp_round" name="comp_round">
+                <option value="">Choose</option>
+                @foreach($rounds as $roundiD => $round_name)
+                    <option value="{{ $roundiD }}">{{ $round_name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </p>
+    
     <div class="form-group">
-        <label for="home_player_1">Home</label>
         <select class="form-control" id="home_player_1" name="home_player_1">
             <option value="">Home</option>
             @foreach($players as $playerId => $playerName)
@@ -28,7 +37,6 @@
     </div>
 
     <div class="form-group">
-        <label for="away_player_1">Away Team</label>
         <select class="form-control" id="away_player_1" name="away_player_1">
             <option value="">Away</option>
             @foreach($players as $playerId => $playerName)
@@ -36,7 +44,7 @@
             @endforeach
         </select>
     </div>
-    <div class="form-group">
+    <p><div class="form-group">
         <label for="location">Location</label>
     <input class="form-control" type="text" name="location" id="location" placeholder="Optional"></p>
     </div>
