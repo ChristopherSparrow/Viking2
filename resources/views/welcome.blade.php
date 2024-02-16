@@ -36,7 +36,8 @@
             <div class="max-w-7xl mx-auto p-6 lg:p-8">
                 <div>
                     <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"><a href="{{ route('seasons.index') }}">ALL SEASONS</a></p>
-                    <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"><a href="seasons/2">THIS SEASON</a></p>
+                    <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"><a href="seasons/1">THIS SEASON</a></p>
+                    <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed"><a href="users/">ADMIN</a></p>
 
                 </div>
                 <div class="flex justify-center">
