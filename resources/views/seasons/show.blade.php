@@ -16,6 +16,19 @@
             </div>
         </div>
     </div>
+    @can('view-team-details')
+    <div class="col-lg-12 mb-4">
+        <div class="card">
+            <div class="card-header">CAPTAINS</div>
+            <div class="card-body">
+                <p><a href="{{ route('players.index',['seasonId' => $seasonId->id])}}">View Players</a><br>
+                     <a href="{{ route('teams.index',['seasonId' => $seasonId->id])}}">View Teams</a><br>
+                </p>
+                    
+             </div>
+        </div>
+    </div>
+    @endcan
 
 </div>
 @if($seasonId->competitions->count() > 0)
@@ -30,15 +43,15 @@
                     @if (in_array($competition->comp_type, [1]))
                     <a href="{{ route('fixtures.index', ['competitionId' => $competition->id, 'seasonId' => $seasonId->id]) }}">Fixtures / Results</a><br>
                     <a href="{{ route('fixtures.table', ['competitionId' => $competition->id, 'seasonId' => $seasonId->id]) }}">Table</a><br>
-                    <a href="{{ route('teams.index',['seasonId' => $seasonId->id])}}">View Teams</a><br>
+
                     @endif
                     @if (in_array($competition->comp_type, [2]))
                     <a href="{{ route('fixtures.index', ['competitionId' => $competition->id, 'seasonId' => $seasonId->id]) }}">Fixtures / Results</a><br>
-                    <a href="{{ route('teams.index',['seasonId' => $seasonId->id])}}">View Teams</a><br>
+
                     @endif
                     @if (in_array($competition->comp_type, [3,4,5]))
                     <a href="{{ route('cups.index', ['competitionId' => $competition->id, 'seasonId' => $seasonId->id]) }}">Fixtures / Results</a><br>
-                    <a href="{{ route('players.index',['seasonId' => $seasonId->id])}}">View Players</a><br>
+
                     @endif
 
                 </p>

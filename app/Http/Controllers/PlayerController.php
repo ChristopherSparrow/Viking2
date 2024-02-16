@@ -4,18 +4,19 @@ namespace App\Http\Controllers;
 use App\Models\Player;
 use App\Models\Team;
 use App\Models\Season;
-
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller
 {
- //   public function index($seasonId)
- //   {
- //       $season = Season::findOrFail($seasonId);
- //       $players = Player::where('season_id', $season->id)->get();
- //       return view('players.index', compact('season', 'players'));
- //   }
 
+    public function __construct()
+    {
+        $this->middleware('permission:view permission', ['only' => ['index']]);
+        $this->middleware('permission:create permission', ['only' => ['create','store']]);
+        $this->middleware('permission:update permission', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete permission', ['only' => ['destroy']]);
+    }
     public function index($seasonId)
     {
         $season = Season::findOrFail($seasonId);
