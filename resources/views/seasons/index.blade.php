@@ -12,9 +12,9 @@
 
 
                      
-    <div class="col-lg-4 mb-4">
-        <div class="card">
-            <div class="card-header">{{ $season->season_name }}</div>
+    <div class="col-lg-4 mb-2">
+        <div class="card shadow p-30 mb-4 bg-white rounded">
+            <div class="card-header d-flex justify-content-between align-items-center">{{ $season->season_name }} <a href="/seasons/{{ $season->id }}"><i class="bi bi-box-arrow-in-right"></i> View Season</a></div>
             <div class="card-body">
                 <p>{{ \Carbon\Carbon::parse($season->season_start_date)->format('F j, Y') }} - {{ \Carbon\Carbon::parse($season->season_end_date)->format('F j, Y') }}</p>
                 
@@ -23,7 +23,7 @@
                  @endforeach
 
             </div>
-            <div class="card-footer"><a href="/seasons/{{ $season->id }}">More</a></div>
+
         </div>
     </div>
     @endforeach

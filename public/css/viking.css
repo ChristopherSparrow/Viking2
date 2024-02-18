@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+.bg-viking {
+  background-color: #038706;
+}
+.navbar-brand {
+  font-family: 'Cinzel', sans-serif;}
+  
+.card-header {
+  background-color: #038706;
+  color: white;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  overflow: hidden;
+  border-bottom: none;
+}
+
+.card-header a {
+  color: white;
+  text-decoration: none;
+}
+
+a {
+  color: #038706;
+  text-decoration: none;
+}

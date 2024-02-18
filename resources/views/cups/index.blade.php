@@ -16,13 +16,13 @@
         $comp_round = $firstFixture->comp_round; // Replace 'comp_round_date' with the actual column name
         @endphp
     
-                <div class="col-lg-4 mb-4">
-                    <div class="card">
-                        <div class="card-header">{{ \Carbon\Carbon::parse($date)->format('F j, Y') }} 
+    <div class="col-lg-4 mb-2">
+        <div class="card shadow p-30 mb-4 bg-white rounded">
+            <div class="card-header d-flex justify-content-between align-items-center">{{ \Carbon\Carbon::parse($date)->format('F j, Y') }} 
                             
                             
                             @if(isset($rounds[$comp_round]))
-                   -  {{ $rounds[$comp_round] }}
+                   |  {{ $rounds[$comp_round] }}
                 @else
                     
                 @endif

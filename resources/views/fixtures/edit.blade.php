@@ -26,8 +26,8 @@
                                 @endforeach
                             </select>
                         </td>
-                        <td><input type="text" class="form-control" name="fixtures[{{ $fixture->id }}][home_score]" value="{{ $fixture->home_score }}"></td>
-                        <td><input type="text" class="form-control" name="fixtures[{{ $fixture->id }}][away_score]" value="{{ $fixture->away_score }}"></td>
+                        <td><input type="text" style="width:40px;" class="form-control" name="fixtures[{{ $fixture->id }}][home_score]" value="{{ $fixture->home_score }}"></td>
+                        <td><input type="text" style="width:40px;" class="form-control" name="fixtures[{{ $fixture->id }}][away_score]" value="{{ $fixture->away_score }}"></td>
                         <td>
 
                             <select class="form-control" id="away_team" name="fixtures[{{ $fixture->id }}][away_team]">

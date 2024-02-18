@@ -5,25 +5,29 @@
 <p><a href="{{ url('/') }}">Home</a> / <a href="{{ route('seasons.index') }}">All Seasons</a> / <a href="/seasons/{{ $seasons->id }}">{{ $seasons->season_name }}</a> / {{ $competitions[$competitionId] }}</p>
 
 <h1> {{ $competitions[$competitionId] }}</h1>
-
-<a href="{{ route('fixtures.create', ['seasonId' => $seasons->id, 'competitionId' => $competitionId]) }}" class="btn btn-primary">Create Fixture</a>
-    @if($fixtures->count() > 0)
     <div class="row">
+        @can('edit-fixtures')
+        <p><a href="{{ route('fixtures.create', ['seasonId' => $seasons->id, 'competitionId' => $competitionId]) }}" class="btn btn-primary">Create Fixture</a></p>
+        @endcan
+        @if($fixtures->count() > 0)
+
         @foreach ($comp_type[$competitionId]== 1 ? $fixtures->sortBy('date')->groupBy('date') : $fixtures->sortByDesc('date')->groupBy('date') as $date => $groupedFixtures)
 
     
-                <div class="col-lg-4 mb-4">
-                    <div class="card">
-                        <div class="card-header">{{ \Carbon\Carbon::parse($date)->format('F j, Y') }}
-                            <div class="float-right">
-                                <a href="{{ route('fixtures.edit', ['seasonId' => $seasons->id, 'competitionId' => $competitionId, 'date' => $date]) }}" class="btn btn-primary btn-sm">Edit</a>
-
-                                <form action="{{ route('fixtures.destroy', ['seasonId' => $seasons->id, 'competitionId' => $competitionId, 'date' => $date]) }}" method="POST" style="display: inline-block;">
+                <div class="col-lg-4">
+                    <div class="card shadow p-30 mb-4 bg-white rounded">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            {{ \Carbon\Carbon::parse($date)->format('F j, Y') }}
+                            @can('edit-fixtures')
+                            <a href="{{ route('fixtures.edit', ['seasonId' => $seasons->id, 'competitionId' => $competitionId, 'date' => $date]) }}">Edit</a>
+                            <form action="{{ route('fixtures.destroy', ['seasonId' => $seasons->id, 'competitionId' => $competitionId, 'date' => $date]) }}" method="POST" style="display: inline-block;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this date?')">Delete</button>
+                                <button type="submit" class="btn btn-danger btn-sm" style="height:25px; width:75px;" onclick="return confirm('Are you sure you want to delete this date?')">Delete</button>
                             </form>
-                            </div>
+
+                            @endcan
+                        
                         </div>
                         
                         <div class="card-body">
@@ -55,7 +59,7 @@
                 </div>
                     @endforeach
 
-    </div>
+     </div> 
 
     @else
         <p>No fixtures found for this competition.</p>
