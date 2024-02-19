@@ -13,6 +13,14 @@ use Illuminate\Http\Request;
 class FixtureController extends Controller
 {
 
+    public function __construct()
+    {
+    
+        $this->middleware('permission:create fixture', ['only' => ['create','store']]);
+        $this->middleware('permission:update fixture', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete fixture', ['only' => ['destroy']]);
+    }
+    
 
     public function index($seasonId, $competitionId)
     {

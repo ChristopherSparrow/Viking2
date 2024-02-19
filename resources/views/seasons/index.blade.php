@@ -2,10 +2,10 @@
 
 @section('content')
 
-<p><a href="{{ url('/') }}">Home</a> / All Seasons</p>
+<p><i><a href="{{ url('/') }}">Home</a> / All Seasons</i></p>
 <h1>All Seasons</h1>
 
-<p><a href="{{ route('seasons.create') }}">Create New Season</a></p>
+@can('delete user')<p><a href="{{ route('seasons.create') }}">Create New Season</a></p>@endcan
 
 <div class="row">
     @foreach ($seasons as $season)

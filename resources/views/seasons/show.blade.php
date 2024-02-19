@@ -9,9 +9,11 @@
 <p>{{ \Carbon\Carbon::parse($seasonId->season_start_date)->format('F j, Y') }} - {{ \Carbon\Carbon::parse($seasonId->season_end_date)->format('F j, Y') }}</p>
 
 <div class="row" data-masonry='{"percentPosition": true }'>
+
+    @can('view player')
     <div class="col-xl-3 col-lg-4 col-md-6 mb-2">
         <div class="card shadow p-30 mb-4 bg-white rounded">
-            <div class="card-header card-header-admin">ADMIN</div>
+            <div class="card-header card-header-admin">Admin Controls</div>
             <div class="card-body card-body-admin">
                 <p><a href="{{ route('competitions.create', ['seasonId' => $seasonId->id]) }}">Add Competitions</a></p>
                 <p><a href="{{ route('teams.index',['seasonId' => $seasonId->id])}}">Edit Teams</a></p>
@@ -19,10 +21,12 @@
             </div>
         </div>
     </div>
-    @can('view-team-details')
+    @endcan
+
+    @can('view team')
     <div class="col-xl-3 col-lg-4 col-md-6 mb-2">
         <div class="card shadow p-30 mb-4 bg-white rounded">
-            <div class="card-header card-header-admin">CAPTAINS</div>
+            <div class="card-header card-header-admin">Captains Information</div>
             <div class="card-body card-body-admin">
                 <p><a href="{{ route('players.index',['seasonId' => $seasonId->id])}}">View Players</a></p>
                 <p><a href="{{ route('teams.index',['seasonId' => $seasonId->id])}}">View Teams</a><br></p>
@@ -30,11 +34,16 @@
         </div>
     </div>
     @endcan
+
     @if($seasonId->competitions->count() > 0)
     @foreach ($seasonId->competitions->sortBy('comp_type') as $competition)
     <div class="col-xl-3 col-lg-4 col-md-6 mb-2">
         <div class="card shadow p-30 mb-4 bg-white rounded">
-            <div class="card-header d-flex justify-content-between align-items-center">{{ $competition->competitions_name }}<a href="{{ route('competitions.edit', ['seasonId' => $seasonId->id, 'competitionId' => $competition->id]) }}"><i class="bi bi-pencil-square"></i> Edit / Delete</a></div>
+            <div class="card-header d-flex justify-content-between align-items-center">{{ $competition->competitions_name }}
+                @can('update competition')
+                <a href="{{ route('competitions.edit', ['seasonId' => $seasonId->id, 'competitionId' => $competition->id]) }}"><i class="bi bi-pencil-square"></i> Edit / Delete</a>
+                @endcan
+            </div>
             <div class="card-body">
 
                 <p>Winner - {{ $competition->comp_winner }}<br>Runner Up - {{ $competition->comp_second }}<br><br>

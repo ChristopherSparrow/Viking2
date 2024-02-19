@@ -7,6 +7,15 @@ use App\Models\Season;
 
 class SeasonController extends Controller
 {
+
+    public function __construct()
+    {
+      //  $this->middleware('permission:view season', ['only' => ['index']]);
+        $this->middleware('permission:create season', ['only' => ['create','store']]);
+        $this->middleware('permission:update season', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete season', ['only' => ['destroy']]);
+    }
+    
     public function index()
     {
         $seasons = Season::orderBy('season_start_date', 'desc')->get();

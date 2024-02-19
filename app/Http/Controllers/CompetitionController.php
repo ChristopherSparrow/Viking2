@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class CompetitionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:view competition', ['only' => ['index']]);
+        $this->middleware('permission:create competition', ['only' => ['create','store']]);
+        $this->middleware('permission:update competition', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete competition', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $competitions = Competition::all();
