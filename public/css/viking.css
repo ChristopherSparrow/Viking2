@@ -13,8 +13,16 @@
   overflow: hidden;
   border-bottom: none;
 }
+.card-header-admin {
+  background-color: #000000;
+}
 
 .card-header a {
+  color: white;
+  text-decoration: none;
+}
+.card-body-admin {
+  background-color: #cccccc;
   color: white;
   text-decoration: none;
 }
