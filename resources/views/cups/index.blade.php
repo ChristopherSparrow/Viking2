@@ -2,7 +2,7 @@
 
 @section('content')
 
-<p><a href="{{ url('/') }}">Home</a> / <a href="{{ route('seasons.index') }}">All Seasons</a> / <a href="/seasons/{{ $seasons->id }}">{{ $seasons->season_name }}</a> / {{ $competitions[$competitionId] }}</p>
+<div class="breadcrumb"><p><a href="{{ url('/') }}">Home</a> / <a href="{{ route('seasons.index') }}">All Seasons</a> / <a href="/seasons/{{ $seasons->id }}">{{ $seasons->season_name }}</a> / {{ $competitions[$competitionId] }}</p></div>
 
 <h1> {{ $competitions[$competitionId] }}</h1>
 
@@ -11,18 +11,17 @@
     <div class="row">
         @foreach ($comp_type[$competitionId] == 1 ? $fixtures->sortBy('date')->groupBy('date') : $fixtures->sortByDesc('date')->groupBy('date') as $date => $groupedFixtures)
          @php
-        // Fetching the comp_round for the first fixture in the grouped fixtures
-        $firstFixture = $groupedFixtures->first();
-        $comp_round = $firstFixture->comp_round; // Replace 'comp_round_date' with the actual column name
+            $firstFixture = $groupedFixtures->first();
+            $comp_round = $firstFixture->comp_round; 
         @endphp
     
-                <div class="col-lg-4 mb-4">
-                    <div class="card">
-                        <div class="card-header">{{ \Carbon\Carbon::parse($date)->format('F j, Y') }} 
+    <div class="col-lg-4 mb-2">
+        <div class="card shadow p-30 mb-4 bg-white rounded">
+            <div class="card-header d-flex justify-content-between align-items-center">{{ \Carbon\Carbon::parse($date)->format('F j, Y') }} 
                             
                             
                             @if(isset($rounds[$comp_round]))
-                   -  {{ $rounds[$comp_round] }}
+                   |  {{ $rounds[$comp_round] }}
                 @else
                     
                 @endif

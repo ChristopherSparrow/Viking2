@@ -5,6 +5,7 @@ use App\Models\Competition;
 use App\Models\Season;
 use App\Models\Fixture;
 use App\Models\Team;
+use App\Models\Round;
 use Illuminate\Support\Facades\DB;
 
 
@@ -13,17 +14,25 @@ use Illuminate\Http\Request;
 class FixtureController extends Controller
 {
 
+    public function __construct()
+    {
+    
+        $this->middleware('permission:create fixture', ['only' => ['create','store']]);
+        $this->middleware('permission:update fixture', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete fixture', ['only' => ['destroy']]);
+    }
+    
 
     public function index($seasonId, $competitionId)
     {
         $competitions = Competition::pluck('competitions_name', 'id');
         $comp_type = Competition::pluck('comp_type', 'id');
-
+        $rounds = Round::pluck('round_name', 'id');
         $teams = Team::orderBy('team_name')->pluck('team_name', 'id');
 
         $seasons = Season::where('id', $seasonId)->first();
         $fixtures = Fixture::where('competition_id', $competitionId)->get();
-        return view('fixtures.index', compact('fixtures', 'competitionId', 'teams', 'competitions', 'seasons','comp_type'));
+        return view('fixtures.index', compact('fixtures', 'rounds', 'competitionId', 'teams', 'competitions', 'seasons','comp_type'));
     }
     
     public function table($seasonId, $competitionId)
@@ -102,6 +111,7 @@ class FixtureController extends Controller
                 'away_score' => $fixtureData['away_score'],
                 'away_team' => $fixtureData['away_team'],
                 'location' => $fixtureData['location'],
+                'comp_round' => $fixtureData['comp_round']
                 // Add other fields as needed
             ]);
         }
@@ -125,7 +135,8 @@ public function create($seasonId, $competitionId)
     $date = today();
     $competition = Competition::findorfail($competitionId);
     $season = Season::findOrFail($seasonId);
-    return view('fixtures.create', compact('season', 'competition', 'competitionId', 'teams', 'date'));
+    $rounds = Round::pluck('round_name', 'id');
+    return view('fixtures.create', compact('season', 'rounds', 'competition', 'competitionId', 'teams', 'date'));
 }
 
 public function store(Request $request, $seasonId, $competitionId)
@@ -141,6 +152,7 @@ public function store(Request $request, $seasonId, $competitionId)
     $fixture->home_score = $request->input('home_score');
     $fixture->away_score = $request->input('away_score');
     $fixture->location = $request->input('location');
+    $fixture->comp_round = $request->input('comp_round');
     // Add other fields as needed
     
     $fixture->save();

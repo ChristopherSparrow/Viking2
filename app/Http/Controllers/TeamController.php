@@ -11,10 +11,10 @@ class TeamController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:view permission', ['only' => ['index']]);
-        $this->middleware('permission:create permission', ['only' => ['create','store']]);
-        $this->middleware('permission:update permission', ['only' => ['update','edit']]);
-        $this->middleware('permission:delete permission', ['only' => ['destroy']]);
+        $this->middleware('permission:view team', ['only' => ['index']]);
+        $this->middleware('permission:create team', ['only' => ['create','store']]);
+        $this->middleware('permission:update team', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete team', ['only' => ['destroy']]);
     }
     public function index($seasonId)
     {
@@ -73,8 +73,8 @@ class TeamController extends Controller
             'team_name' => 'required|string|max:255',
             'team_captain' => 'required|string|max:255',
             'team_vice_captain' => 'required|string|max:255',
-            'team_captain_no'=> 'required|string|max:255',
-            'team_vice_captain_no' => 'required|string|max:255',
+            'team_captain_no'=> 'string|max:255',
+            'team_vice_captain_no' => 'string|max:255',
             // Add other validation rules for your fields
         ]);
 

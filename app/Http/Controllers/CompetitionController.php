@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class CompetitionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:view competition', ['only' => ['index']]);
+        $this->middleware('permission:create competition', ['only' => ['create','store']]);
+        $this->middleware('permission:update competition', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete competition', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $competitions = Competition::all();
@@ -24,9 +32,9 @@ class CompetitionController extends Controller
     {
         $validatedData = $request->validate([
             'competitions_name' => 'required|string|max:255',
-            'comp_type' => 'string|max:255',
-
-
+            'comp_type' => 'required|string|max:255',
+            'comp_winner' => 'string|max:255',
+            'comp_second' => 'string|max:255',
         ]);
     
         //dd($validatedData);

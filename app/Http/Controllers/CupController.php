@@ -11,6 +11,14 @@ use Illuminate\Http\Request;
 
 class CupController extends Controller
 {
+    public function __construct()
+    {
+
+        $this->middleware('permission:create cup', ['only' => ['create','store']]);
+        $this->middleware('permission:update cup', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete cup', ['only' => ['destroy']]);
+    }
+
     public function index($seasonId, $competitionId)
     {
         $competitions = Competition::pluck('competitions_name', 'id');
