@@ -40,7 +40,17 @@
         <label for="location">Location</label>
     <input class="form-control" type="text" name="location" id="location" placeholder="Optional"></p>
     </div>
-
+    <p>
+        <div class="form-group">
+            <label for="comp_round">Competition Round</label>
+            <select class="form-control" id="comp_round" name="comp_round">
+                <option value="">Choose</option>
+                @foreach($rounds as $roundiD => $round_name)
+                    <option value="{{ $roundiD }}">{{ $round_name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </p>
     <!-- Add other fields as needed -->
 
     <p><button type="submit" class="btn btn-primary">Create Fixture</button></p>

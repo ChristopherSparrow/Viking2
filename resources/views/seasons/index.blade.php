@@ -2,16 +2,22 @@
 
 @section('content')
 
-<p><i><a href="{{ url('/') }}">Home</a> / All Seasons</i></p>
+<div class="breadcrumb"><p><a href="{{ url('/') }}">Home</a> / All Seasons</p></div>
 <h1>All Seasons</h1>
 
-@can('delete user')<p><a href="{{ route('seasons.create') }}">Create New Season</a></p>@endcan
+
+<div class="col-xl-3 col-lg-4 col-md-6 mb-2">
+    <div class="card shadow p-30 mb-4 bg-white rounded">
+        <div class="card-header card-header-admin">Admin Controls</div>
+        <div class="card-body card-body-admin">
+            <p><a href="{{ route('seasons.create') }}">Create New Season</a></p>
+        </div>
+    </div>
+</div>
+
 
 <div class="row">
-    @foreach ($seasons as $season)
-
-
-                     
+    @foreach ($seasons as $season)                     
     <div class="col-lg-4 mb-2">
         <div class="card shadow p-30 mb-4 bg-white rounded">
             <div class="card-header d-flex justify-content-between align-items-center">{{ $season->season_name }} <a href="/seasons/{{ $season->id }}"><i class="bi bi-box-arrow-in-right"></i> View Season</a></div>

@@ -4,7 +4,7 @@
 
 <p><a href="{{ url('/') }}">Home</a> / <a href="{{ route('seasons.index') }}">All Seasons</a> / <a href="/seasons/{{ $season->id }}">{{ $season->season_name }}</a> / All Teams</p>
 <h1>Teams for {{ $season->season_name }}</h1>
-@can('edit-fixtures')
+@can('create team')
 <p><a href="{{ route('teams.create', ['seasonId' => $season->id]) }}">Add New Team</a></p>
 @endcan
 <div class="row">

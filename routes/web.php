@@ -25,6 +25,7 @@ Route::get('/', function () { return view('welcome');});
     Route::get('/seasons', [SeasonController::class, 'index'])->name('seasons.index');
     Route::get('/seasons/{seasonId}', [SeasonController::class, 'show'])->name('seasons.show');
 
+
 //COMPS
     Route::get('/seasons/{seasonId}/competitions', [CompetitionController::class, 'index'])->name('competitions.index');
     Route::get('/seasons/{seasonId}/competitions/{competitionId}', [CompetitionController::class, 'show'])->name('competitions.show');
@@ -35,8 +36,6 @@ Route::get('/', function () { return view('welcome');});
 
 //CUPS
     Route::get('/cups/{seasonId}/{competitionId}/', [CupController::class, 'index'])->name('cups.index');
-
-
 
 Auth::routes();
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -58,12 +57,13 @@ Auth::routes();
         Route::get('users/{userId}/delete', [App\Http\Controllers\UserController::class, 'destroy']);
 
         //SEASONS
+        Route::get('/season/create', [App\Http\Controllers\SeasonController::class, 'create'])->name('seasons.create');
+        Route::post('/seasons/store', [SeasonController::class, 'store'])->name('seasons.store');
         Route::get('/seasons/{seasonId}/edit', [SeasonController::class, 'edit'])->name('seasons.edit');
         Route::patch('/seasons/{seasonId}', [SeasonController::class, 'update'])->name('seasons.update');
         Route::delete('/seasons/{seasonId}', [SeasonController::class, 'destroy'])->name('seasons.destroy');
-        Route::post('/seasons', [SeasonController::class, 'store'])->name('seasons.store');
-        Route::get('/seasons/create', [SeasonController::class, 'create'])->name('seasons.create');
 
+   
         //COMPS
         Route::get('/competitions/{seasonId}/create', [CompetitionController::class, 'create'])->name('competitions.create');
         Route::post('/competitions/{seasonId}/store', [CompetitionController::class, 'store'])->name('competitions.store');

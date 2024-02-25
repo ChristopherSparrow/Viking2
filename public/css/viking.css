@@ -6,6 +6,7 @@
   font-family: 'Cinzel', sans-serif;}
   
 .card-header {
+  /* background-color: #873E03; */
   background-color: #038706;
   color: white;
   border-top-left-radius: 15px;
@@ -28,6 +29,12 @@
 }
 
 a {
-  color: #038706;
+  color: #1D0387;
   text-decoration: none;
+}
+
+.breadcrumb {
+  margin-top:10px;
+  padding-bottom:0px;
+  margin-bottom:0px;
 }

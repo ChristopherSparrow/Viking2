@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
-<p><i><a href="{{ url('/') }}">Home</a> / <a href="{{ route('seasons.index') }}">All Seasons</a> / {{ $seasonId->season_name }}</i></p>
+<div class="breadcrumb"><p><a href="{{ url('/') }}">Home</a> / <a href="{{ route('seasons.index') }}">All Seasons</a> / {{ $seasonId->season_name }}</p>
 </div>
 <h1>{{ $seasonId->season_name }}</h1>
 

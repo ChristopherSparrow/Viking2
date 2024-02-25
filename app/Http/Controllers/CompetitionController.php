@@ -32,9 +32,9 @@ class CompetitionController extends Controller
     {
         $validatedData = $request->validate([
             'competitions_name' => 'required|string|max:255',
-            'comp_type' => 'string|max:255',
-
-
+            'comp_type' => 'required|string|max:255',
+            'comp_winner' => 'string|max:255',
+            'comp_second' => 'string|max:255',
         ]);
     
         //dd($validatedData);
