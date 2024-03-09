@@ -88,11 +88,12 @@ class FixtureController extends Controller
         $competitions = Competition::pluck('competitions_name', 'id');
         $seasons = Season::where('id', $seasonId)->first();
         $teams = Team::orderBy('team_name')->pluck('team_name', 'id');
+        $rounds = Round::pluck('round_name', 'id');
         $fixtures = Fixture::where('competition_id', $competitionId)
                         ->where('date', $date)
                         ->get();
         //dd($fixtures);
-        return view('fixtures.edit', compact('fixtures', 'competitionId', 'date', 'teams', 'seasons', 'competitions'));
+        return view('fixtures.edit', compact('fixtures', 'competitionId', 'date', 'teams', 'seasons', 'rounds', 'competitions'));
     }
     
   
@@ -111,7 +112,7 @@ class FixtureController extends Controller
                 'away_score' => $fixtureData['away_score'],
                 'away_team' => $fixtureData['away_team'],
                 'location' => $fixtureData['location'],
-                'comp_round' => $fixtureData['comp_round']
+                'comp_round' => $fixtureData['comp_round'],
                 // Add other fields as needed
             ]);
         }

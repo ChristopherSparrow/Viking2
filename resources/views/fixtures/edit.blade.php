@@ -38,7 +38,9 @@
                                 @endforeach
                             </select>
                         </td>
-                        <td></td>
+                        <td>
+                            <input type="hidden" style="width:440px;" class="form-control" name="fixtures[{{ $fixture->id }}][comp_round]" value="{{ $fixture->comp_round }}">
+                        </td>
                     </tr></table>
                 </div>
             @endforeach

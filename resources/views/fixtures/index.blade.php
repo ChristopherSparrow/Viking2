@@ -1,11 +1,21 @@
 @extends('layouts.app') 
 
+@section('title', $seasons->season_name . ' - ' .  $competitions[$competitionId] )
+
 @section('content')
 
 <div class="breadcrumb"><p><a href="{{ url('/') }}">Home</a> / <a href="{{ route('seasons.index') }}">All Seasons</a> / <a href="/seasons/{{ $seasons->id }}">{{ $seasons->season_name }}</a> / {{ $competitions[$competitionId] }}</p></div>
 
 <h1> {{ $competitions[$competitionId] }}</h1>
-
+@if ($comp_type[$competitionId] == 1)
+    <div class="row">
+        <nav class="nav nav-pills nav-fill">
+            <a class="flex-sm-fill text-sm-center nav-link " href="{{ route('fixtures.table', ['competitionId' => $competitionId, 'seasonId' => $seasons->id]) }}">League Table</a>
+            <a class="flex-sm-fill text-sm-center nav-link " href="#">Most Wins</a>
+            <a class="flex-sm-fill text-sm-center nav-link " href="#">Most 8 Ball Clearances</a>
+        </nav>
+    </div>
+@endif
     <div class="row">
         @can('update fixture')
             <p><a href="{{ route('fixtures.create', ['seasonId' => $seasons->id, 'competitionId' => $competitionId]) }}" class="btn btn-primary">Create Fixture</a></p>
@@ -46,22 +56,37 @@
                             @foreach ($groupedFixtures as $fixture)
                             @if($fixture->location )
                             <tr>
-                                                                    <td style="text-align: center; vertical-align: middle;"><i class="bi bi-search"></i></td>
-                                    <td style="border: none;">{{ $teams[$fixture->home_team] }}<br>
+                                <td style="text-align: center; vertical-align: middle;" rowspan="2"><i class="bi bi-search"></i></td>
+                                <td style="border: none;">{{ $teams[$fixture->home_team] }}<br>
                                     {{ $teams[$fixture->away_team] }}</td>
-                                    <td style="text-align: center; background: #ccc;">{{ $fixture->home_score }}<br>
+                                <td style="text-align: center; background: #ccc;">{{ $fixture->home_score }}<br>
                                     {{ $fixture->away_score }}</td>
                                 </tr>
                                 <tr>
-                                <td style="text-align: center;" colspan="2">VENUE: {{ $fixture->location }}</td></tr>
+                                <td style="text-align: left;" colspan="3">VENUE: {{ $fixture->location }}</td></tr>
                     
                             @else
                             <tr>
                                 <td style="text-align: center; vertical-align: middle;"><i class="bi bi-search"></i></td>
-                                <td>{{ $teams[$fixture->home_team] }}<br>
-                                {{ $teams[$fixture->away_team] }}</td>
-                                <td style="text-align: center; background: #ccc;">{{ $fixture->home_score }}<br>
-                                {{ $fixture->away_score }}</td>
+                                
+                                    @if($fixture->home_score > $fixture->away_score)
+                                    <td><strong>{{ $teams[$fixture->home_team] }}</strong><br>
+                                        {{ $teams[$fixture->away_team] }}</td>
+                                        <td style="text-align: center; background: #ccc;"><strong>{{ $fixture->home_score }}</strong><br>
+                                            {{ $fixture->away_score }}</td>
+                                    @elseif ($fixture->away_score > $fixture->home_score)
+                                    <td>{{ $teams[$fixture->home_team] }}<br>
+                                        <strong>{{ $teams[$fixture->away_team] }}</strong></td>
+                                        <td style="text-align: center; background: #ccc;">{{ $fixture->home_score }}<br>
+                                            <strong>{{ $fixture->away_score }}</strong></td>
+                                    @else
+                                    <td>{{ $teams[$fixture->home_team] }}<br>
+                                        {{ $teams[$fixture->away_team] }}</td>
+                                        <td style="text-align: center; background: #ccc;">{{ $fixture->home_score }}<br>
+                                            {{ $fixture->away_score }}</td>
+                                    @endif
+
+
                             </tr>           
                             @endif
                             @endforeach

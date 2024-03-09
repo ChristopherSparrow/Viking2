@@ -1,17 +1,67 @@
 @extends('layouts.app')
+@section('title', 'Home')
 
 @section('content')
 
 
-<h1 style="padding-top:10px">the Viking Pool League</h1>
-<p>The pool league for Pocklington, Market Weighton and surrounding villages</p>
+<h1 style="padding-top:10px"><strong>the Viking Pool League</strong></h1>
+<p>A blackball pool league for Pocklington, Market Weighton and surrounding villages.</p>
 
 <div class="row" data-masonry='{"percentPosition": true }'>
 
     <div class="col-lg-4 mb-2">
         <div class="card shadow p-30 mb-4 bg-white rounded">
-            <div class="card-header d-flex justify-content-between align-items-center">Latest News</div>
-            <div class="card-body"><p>News to go in here</p></div>
+            <div class="card-header d-flex justify-content-between align-items-center">Latest News
+
+                <div class="float-right"><i class="bi bi-newspaper"></i> More</div>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <tr>
+                        <td><img src="/img/icon.png" style="height:100px; width:100px"></td>
+                        <td>
+                            <p><strong>Headline in here to explain something</strong></p>
+                            <p>Here are some words that describe the article and the update in more words</p>
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col-auto">
+                                    <p><i class="bi bi-calendar"></i> 3rd March 2024</p>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img src="/img/icon.png" style="height:100px; width:100px"></td>
+                        <td>
+                            <p><strong>Headline in here to explain something</strong></p>
+                            <p>Here are some words that describe the article and the update in more words</p>
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col-auto">
+                                    <p><i class="bi bi-calendar"></i> 3rd March 2024</p>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img src="/img/icon.png" style="height:100px; width:100px"></td>
+                        <td>
+                            <p><strong>Headline in here to explain something</strong></p>
+                            <p>Here are some words that describe the article and the update in more words</p>
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col-auto">
+                                    <p><i class="bi bi-calendar"></i> 3rd March 2024</p>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+                
+            </div>
         </div>
     </div>
 
@@ -24,14 +74,14 @@
 
             @else
                 <div class="card shadow p-30 mb-4 bg-white rounded">
-                    <div class="card-header">Fixtures </div> 
+                    <div class="card-header">Fixtures & Results</div> 
                        <div class="card-body">
                 @foreach ($allFixtures->groupBy('date') as $date => $allfixturesByDate)
 
 
-                        <p>{{ \Carbon\Carbon::parse($date)->format('D, d M Y') }}</p>
+                        <p><strong>{{ \Carbon\Carbon::parse($date)->format('D, d M Y') }}</strong></p>
                         
-<table class="table">
+                            <table class="table">
                                 @foreach ($allfixturesByDate as $fixture)
 
                                 
@@ -45,7 +95,7 @@
                              </td></tr>
                             
                                 @endforeach                                
-</table>
+                            </table>
                 @endforeach
                     </div>
                 </div>       
@@ -53,10 +103,6 @@
 
 
     </div>
-
-
-
-
 
     <div class="col-lg-4 mb-2">
         <div class="card shadow p-30 mb-4 bg-white rounded">
@@ -99,9 +145,19 @@
         </div>
     </div>
 
-    <p><a href="{{ route('seasons.index') }}">All Seasons</a> | <a href="seasons/1">This Season</a></p>
+</div>
 
-
+<div class="container">
+    <div class="row">
+        <nav class="nav nav-pills nav-fill">
+            <a class="flex-sm-fill text-sm-center nav-link " href="{{ route('fixtures.index', ['competitionId' => 1, 'seasonId' => 1]) }}">Divison One</a>
+            <a class="flex-sm-fill text-sm-center nav-link " href="{{ route('fixtures.index', ['competitionId' => 2, 'seasonId' => 1]) }}">Team Knock Out</a>
+            <a class="flex-sm-fill text-sm-center nav-link " href="{{ route('cups.index', ['competitionId' => 3, 'seasonId' => 1]) }}">Singles Cup</a>
+            <a class="flex-sm-fill text-sm-center nav-link " href="{{ route('cups.index', ['competitionId' => 7, 'seasonId' => 1]) }}">Singles Plate</a>
+            <a class="flex-sm-fill text-sm-center nav-link " href="{{ route('cups.index', ['competitionId' => 4, 'seasonId' => 1]) }}">Over 45s Cup</a>
+            <a class="flex-sm-fill text-sm-center nav-link " href="{{ route('cups.index', ['competitionId' => 5, 'seasonId' => 1]) }}">Doubles Cup</a>
+        </nav>
+    </div>
 </div>
 
 @endsection
