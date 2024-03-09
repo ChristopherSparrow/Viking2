@@ -12,14 +12,19 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link"  href="{{ route('seasons.index') }}">ALL SEASONS</a>
+                    <a class="nav-link" href="{{ route('seasons.show', ['seasonId' => 1]) }}">Current Season (Winter 2023/2024)</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('seasons.show', ['seasonId' => 1]) }}">THIS SEASON</a>
+                    <a class="nav-link"  href="{{ route('seasons.index') }}">All Seasons</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="users/">ADMIN</a>
+                    <a class="nav-link"  href="#">League Rules</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link"  href="#">Download Scorecards</a>
+                </li>
+
+
                 
                 
                
@@ -39,8 +44,9 @@
                     @endif
                 @else
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('seasons.index') }}">{{ __('Seasons') }}</a>
+                    <a class="nav-link" href="users/">ADMIN</a>
                 </li>
+
                     <li class="nav-item dropdown">
                         <a id="navbarloggedin" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}

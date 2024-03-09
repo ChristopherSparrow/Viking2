@@ -46,7 +46,21 @@
     </div>
     <p><div class="form-group">
         <label for="location">Location</label>
-    <input class="form-control" type="text" name="location" id="location" placeholder="Optional"></p>
+
+    <select class="form-control" name="location" id="location" placeholder="Optional">
+    <option value="">Optional</option>
+    <option value="Black Swan (Fog)">Black Swan (Fog)</option>
+    <option value="Black Swan (Pock)">Black Swan (Pock)</option>
+    <option value="Blacksmith Arms">Blacksmith Arms</option>
+    <option value="Cross Keys">Cross Keys</option>
+    <option value="Griffin">Griffin</option>
+    <option value="HOSM Club">HOSM Club</option>
+    <option value="Londesborough Arms">Londesborough Arms</option>
+    <option value="North Cave">North Cave</option>
+    <option value="Stumble inn">Stumble Inn</option>
+    <option value="United Services Club">United Services Club</option>
+    </select>
+    </p>
     </div>
 
     <!-- Add other fields as needed -->

@@ -7,6 +7,7 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\CupController;
+use App\Http\Controllers\VikingHomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +20,9 @@ use App\Http\Controllers\CupController;
 |
 */
 
-Route::get('/', function () { return view('welcome');});
-
+//Route::get('/', function () { return view('vikinghome');});
+    Route::get('/', [VikingHomeController::class, 'index']);
+  
 //SEASONS
     Route::get('/seasons', [SeasonController::class, 'index'])->name('seasons.index');
     Route::get('/seasons/{seasonId}', [SeasonController::class, 'show'])->name('seasons.show');

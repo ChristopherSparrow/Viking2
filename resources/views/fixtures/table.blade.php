@@ -6,6 +6,14 @@
 
 <h1> {{ $competitions[$competitionId] }} Table</h1>
 
+<div class="row">
+    <nav class="nav nav-pills nav-fill">
+        <a class="flex-sm-fill text-sm-center nav-link " href="{{ route('fixtures.index', ['competitionId' => $competitionId, 'seasonId' => $seasons->id]) }}">Fixtures & Results</a>
+        <a class="flex-sm-fill text-sm-center nav-link " href="#">Most Wins</a>
+        <a class="flex-sm-fill text-sm-center nav-link " href="#">Most 8 Ball Clearances</a>
+    </nav>
+</div>
+
     @if($fixtures->count() > 0)
     <div class="row">
 
