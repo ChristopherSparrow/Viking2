@@ -1,4 +1,5 @@
 @extends('layouts.app') 
+@section('title', $seasons->season_name . ' - ' .  $competitions[$competitionId] )
 
 @section('content')
 
@@ -6,7 +7,9 @@
 
 <h1> {{ $competitions[$competitionId] }}</h1>
 
+@can('create cup')
 <a href="{{ route('cups.create', ['seasonId' => $seasons->id, 'competitionId' => $competitionId]) }}" class="btn btn-primary">Create Fixture</a>
+@endcan
     @if($fixtures->count() > 0)
     <div class="row">
         @foreach ($comp_type[$competitionId] == 1 ? $fixtures->sortBy('date')->groupBy('date') : $fixtures->sortByDesc('date')->groupBy('date') as $date => $groupedFixtures)
@@ -20,14 +23,14 @@
             <div class="card-header d-flex justify-content-between align-items-center">{{ \Carbon\Carbon::parse($date)->format('F j, Y') }} 
                             
                             
-                            @if(isset($rounds[$comp_round]))
+                @if(isset($rounds[$comp_round]))
                    |  {{ $rounds[$comp_round] }}
                 @else
                     
                 @endif
                        
 
-                            
+                @can('update cup')
                             <div class="float-right">
                                 <a href="{{ route('cups.edit', ['seasonId' => $seasons->id, 'competitionId' => $competitionId, 'date' => $date]) }}" class="btn btn-primary btn-sm">Edit</a>
 
@@ -37,6 +40,8 @@
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this date?')">Delete</button>
                             </form>
                             </div>
+
+                            @endcan
                         </div>
                         
                         <div class="card-body">
@@ -45,21 +50,48 @@
                                
                                 @if($fixture->location )
                                     <tr>
-                                        <td style="border: none;">{{ $players[$fixture->home_player_1] }}<br>
-                                        {{ $players[$fixture->away_player_1] }}</td>
-                                        <td style="text-align: center; background: #ccc;">{{ $fixture->home_score }}<br>
+                                        @if($fixture->home_score > $fixture->away_score)
+                                        <td style="border: none;"><strong>{{ $players[$fixture->home_player_1] }} @if($comp_type[$competitionId] == 5) / {{ $players[$fixture->home_player_2] }}@endif</strong><br>
+                                        {{ $players[$fixture->away_player_1] }} @if($comp_type[$competitionId] == 5) / {{ $players[$fixture->away_player_2] }}@endif</td>
+                                        <td style="text-align: center; background: #ccc;"><strong>{{ $fixture->home_score }}</strong><br>
                                         {{ $fixture->away_score }}</td>
+                                        @elseif($fixture->home_score < $fixture->away_score)
+                                        <td style="border: none;">{{ $players[$fixture->home_player_1] }} @if($comp_type[$competitionId] == 5) / {{ $players[$fixture->home_player_2] }}@endif<br>
+                                            <strong>{{ $players[$fixture->away_player_1] }}@if($comp_type[$competitionId] == 5) / {{ $players[$fixture->away_player_2] }}@endif</strong></td>
+                                            <td style="text-align: center; background: #ccc;">{{ $fixture->home_score }}<br>
+                                                <strong>{{ $fixture->away_score }}</strong></td>
+                                        @else
+                                        <td style="border: none;">{{ $players[$fixture->home_player_1] }} @if($comp_type[$competitionId] == 5) / {{ $players[$fixture->home_player_2] }}@endif<br>
+                                            {{ $players[$fixture->away_player_1] }} @if($comp_type[$competitionId] == 5) / {{ $players[$fixture->away_player_2] }}@endif</td>
+                                            <td style="text-align: center; background: #ccc;">{{ $fixture->home_score }}<br>
+                                            {{ $fixture->away_score }}</td>
+
+                                        @endif
                                     </tr>
                                     <tr>
-                                    <td style="text-align: center;" colspan="2">VENUE: {{ $fixture->location }}</td></tr>
+                                        <td style="text-align: left;" colspan="2">VENUE: {{ $fixture->location }}</td>
+                                    </tr>
                      
                                 @else
                                 <tr>
-                                    <td>{{ $players[$fixture->home_player_1] }}<br>
+                                    @if($fixture->home_score > $fixture->away_score)
+                                    <td style="border: none;"><strong>{{ $players[$fixture->home_player_1] }}</strong><br>
                                     {{ $players[$fixture->away_player_1] }}</td>
-                                    <td style="text-align: center; background: #ccc;">{{ $fixture->home_score }}<br>
+                                    <td style="text-align: center; background: #ccc;"><strong>{{ $fixture->home_score }}</strong><br>
                                     {{ $fixture->away_score }}</td>
-                                </tr>           
+                                    @elseif($fixture->home_score < $fixture->away_score)
+                                    <td style="border: none;">{{ $players[$fixture->home_player_1] }}<br>
+                                        <strong>{{ $players[$fixture->away_player_1] }}</strong></td>
+                                        <td style="text-align: center; background: #ccc;">{{ $fixture->home_score }}<br>
+                                            <strong>{{ $fixture->away_score }}</strong></td>
+                                    @else
+                                    <td style="border: none;">{{ $players[$fixture->home_player_1] }}<br>
+                                        {{ $players[$fixture->away_player_1] }}</td>
+                                        <td style="text-align: center; background: #ccc;">{{ $fixture->home_score }}<br>
+                                        {{ $fixture->away_score }}</td>
+
+                                    @endif
+                                </tr>       
                                 @endif
                                 @endforeach
                             </table>

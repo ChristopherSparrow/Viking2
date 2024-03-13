@@ -53,6 +53,8 @@ class CupController extends Controller
         $fixture->date = $request->input('date');
         $fixture->home_player_1 = $request->input('home_player_1');
         $fixture->away_player_1 = $request->input('away_player_1');
+        $fixture->home_player_2 = $request->input('home_player_2');
+        $fixture->away_player_2 = $request->input('away_player_2');
         $fixture->home_score = $request->input('home_score');
         $fixture->away_score = $request->input('away_score');
         $fixture->location = $request->input('location');
@@ -84,9 +86,11 @@ class CupController extends Controller
     
             $fixture->update([
                 'home_player_1' => $fixtureData['home_player_1'],
+                'home_player_2' => $fixtureData['home_player_2'],
                 'home_score' => $fixtureData['home_score'],
                 'away_score' => $fixtureData['away_score'],
                 'away_player_1' => $fixtureData['away_player_1'],
+                'away_player_2' => $fixtureData['away_player_2'],
                 'location' => $fixtureData['location'],
                 // Add other fields as needed
             ]);

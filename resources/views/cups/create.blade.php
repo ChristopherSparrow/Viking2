@@ -28,21 +28,40 @@
     </p>
     
     <div class="form-group">
+        <p>Home Player(s)
         <select class="form-control" id="home_player_1" name="home_player_1">
-            <option value="">Home</option>
+            <option value="">Home player (1)</option>
             @foreach($players as $playerId => $playerName)
                 <option value="{{ $playerId }}">{{ $playerName }}</option>
             @endforeach
         </select>
+        <select class="form-control" id="home_player_2" name="home_player_2">
+            <option value="">Home player (2)</option>
+            @foreach($players as $playerId => $playerName)
+                <option value="{{ $playerId }}">{{ $playerName }}</option>
+            @endforeach
+        </select>
+    </p>
     </div>
 
     <div class="form-group">
+        <p>Away
         <select class="form-control" id="away_player_1" name="away_player_1">
-            <option value="">Away</option>
+            <option value="">Away Player (1)</option>
             @foreach($players as $playerId => $playerName)
                 <option value="{{ $playerId }}">{{ $playerName }}</option>
             @endforeach
         </select>
+        <select class="form-control" id="away_player_2" name="away_player_2">
+            <option value="">Away Player (2)</option>
+            @foreach($players as $playerId => $playerName)
+                <option value="{{ $playerId }}">{{ $playerName }}</option>
+            @endforeach
+        </select>
+
+
+
+    </p>    
     </div>
     <p><div class="form-group">
         <label for="location">Location</label>

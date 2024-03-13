@@ -5,6 +5,7 @@ use App\Models\Competition;
 use App\Models\Season;
 use App\Models\Fixture;
 use App\Models\Team;
+use App\Models\News;
 use App\Models\Round;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -88,11 +89,11 @@ class VikingHomeController extends Controller
         ->get();
     
 
+        $news = News::latest()->get();
 
 
 
-
-        return view('VikingHome', compact('standings', 'allFixtures'));
+        return view('VikingHome', compact('standings', 'allFixtures', 'news'));
     }
 
 }

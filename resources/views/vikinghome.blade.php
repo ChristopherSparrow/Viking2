@@ -13,52 +13,30 @@
         <div class="card shadow p-30 mb-4 bg-white rounded">
             <div class="card-header d-flex justify-content-between align-items-center">Latest News
 
-                <div class="float-right"><i class="bi bi-newspaper"></i> More</div>
+                <div class="float-right"><a href="{{ route('news.index')}}"><i class="bi bi-newspaper"></i> More News</a></div>
             </div>
             <div class="card-body">
                 <table class="table">
+
+                    @foreach ($news as $article)
+
                     <tr>
-                        <td><img src="/img/icon.png" style="height:100px; width:100px"></td>
+                        <td><img src="{{ $article->image }}" style="height:100px; width:100px"></td>
                         <td>
-                            <p><strong>Headline in here to explain something</strong></p>
-                            <p>Here are some words that describe the article and the update in more words</p>
+                            <p><strong>{{ $article->title }}</strong></p>
+                            <p>{{ $article->content }}</p>
                             <div class="row">
                                 <div class="col"></div>
                                 <div class="col-auto">
-                                    <p><i class="bi bi-calendar"></i> 3rd March 2024</p>
+                                    <p><i class="bi bi-calendar"></i> {{ \Carbon\Carbon::parse($article->created_at )->format('jS F Y') }}</p>
+
                                 </div>
                             </div>
 
                         </td>
                     </tr>
-                    <tr>
-                        <td><img src="/img/icon.png" style="height:100px; width:100px"></td>
-                        <td>
-                            <p><strong>Headline in here to explain something</strong></p>
-                            <p>Here are some words that describe the article and the update in more words</p>
-                            <div class="row">
-                                <div class="col"></div>
-                                <div class="col-auto">
-                                    <p><i class="bi bi-calendar"></i> 3rd March 2024</p>
-                                </div>
-                            </div>
+                    @endforeach
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="/img/icon.png" style="height:100px; width:100px"></td>
-                        <td>
-                            <p><strong>Headline in here to explain something</strong></p>
-                            <p>Here are some words that describe the article and the update in more words</p>
-                            <div class="row">
-                                <div class="col"></div>
-                                <div class="col-auto">
-                                    <p><i class="bi bi-calendar"></i> 3rd March 2024</p>
-                                </div>
-                            </div>
-
-                        </td>
-                    </tr>
                 </table>
                 
             </div>
@@ -79,7 +57,7 @@
                 @foreach ($allFixtures->groupBy('date') as $date => $allfixturesByDate)
 
 
-                        <p><strong>{{ \Carbon\Carbon::parse($date)->format('D, d M Y') }}</strong></p>
+                        <p><strong>{{ \Carbon\Carbon::parse($date)->format('l, jS F Y')}}</strong></p>
                         
                             <table class="table">
                                 @foreach ($allfixturesByDate as $fixture)

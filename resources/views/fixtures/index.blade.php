@@ -56,18 +56,33 @@
                             @foreach ($groupedFixtures as $fixture)
                             @if($fixture->location )
                             <tr>
-                                <td style="text-align: center; vertical-align: middle;" rowspan="2"><i class="bi bi-search"></i></td>
-                                <td style="border: none;">{{ $teams[$fixture->home_team] }}<br>
+                                
+                                    @if($comp_type[$competitionId] == 1)<td style="text-align: center; vertical-align: middle;" rowspan="2"><i class="bi bi-search"></i></td>@endif
+
+                                @if($fixture->home_score > $fixture->away_score)
+                                <td style="border: none;"><strong>{{ $teams[$fixture->home_team] }}</strong><br>
                                     {{ $teams[$fixture->away_team] }}</td>
-                                <td style="text-align: center; background: #ccc;">{{ $fixture->home_score }}<br>
+                                <td style="text-align: center; background: #ccc;"><strong>{{ $fixture->home_score }}</strong><br>
                                     {{ $fixture->away_score }}</td>
+                                    @elseif ($fixture->away_score > $fixture->home_score)
+                                    <td style="border: none;">{{ $teams[$fixture->home_team] }}<br>
+                                        <strong>{{ $teams[$fixture->away_team] }}</strong></td>
+                                    <td style="text-align: center; background: #ccc;">{{ $fixture->home_score }}<br>
+                                        <strong>{{ $fixture->away_score }}</strong></td>
+                                        @else
+                                        <td style="border: none;">{{ $teams[$fixture->home_team] }}<br>
+                                        {{ $teams[$fixture->away_team] }}</td>
+                                        <td style="text-align: center; background: #ccc;">{{ $fixture->home_score }}<br>
+                                        {{ $fixture->away_score }}</td>
+                                @endif
                                 </tr>
                                 <tr>
                                 <td style="text-align: left;" colspan="3">VENUE: {{ $fixture->location }}</td></tr>
                     
                             @else
                             <tr>
-                                <td style="text-align: center; vertical-align: middle;"><i class="bi bi-search"></i></td>
+                                
+                                    @if($comp_type[$competitionId]== 1)<td style="text-align: center; vertical-align: middle;"><i class="bi bi-search"></i></td> @endif
                                 
                                     @if($fixture->home_score > $fixture->away_score)
                                     <td><strong>{{ $teams[$fixture->home_team] }}</strong><br>
