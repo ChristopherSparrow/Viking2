@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SeasonController;
 use App\Http\Controllers\CompetitionController;
@@ -38,6 +39,11 @@ use App\Http\Controllers\VikingHomeController;
 
 //CUPS
     Route::get('/cups/{seasonId}/{competitionId}/', [CupController::class, 'index'])->name('cups.index');
+    
+//CUPS
+    Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+
+
 
 Auth::routes();
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -105,6 +111,13 @@ Auth::routes();
         Route::delete('/fixtures/{seasonId}/{competitionId}/{date}', [FixtureController::class, 'destroy'])->name('fixtures.destroy');
         Route::get('/fixtures/create/{seasonId}/{competitionId}', [FixtureController::class, 'create'])->name('fixtures.create');
         Route::post('/fixtures/store/{seasonId}/{competitionId}', [FixtureController::class, 'store'])->name('fixtures.store');
+
+        //NEWS
+        Route::get('/news/{newsId}/edit', [NewsController::class, 'edit'])->name('news.edit');
+        Route::put('/news/{newsId}/update', [NewsController::class, 'update'])->name('news.update');
+        Route::delete('/news/{newsId}/destroy', [NewsController::class, 'destroy'])->name('news.destroy');
+        Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
+        Route::post('/news/store', [NewsController::class, 'store'])->name('news.store');
 
 });
 
