@@ -15,6 +15,9 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+
+                    <p><a class="nav-link" href="{{ route('seasons.index') }}">Seasons</a></p>
+                                
                 </div>
             </div>
         </div>
