@@ -93,7 +93,7 @@ class VikingHomeController extends Controller
 
 
 
-        return view('VikingHome', compact('standings', 'allFixtures', 'news'));
+        return view('vikinghome', compact('standings', 'allFixtures', 'news'));
     }
 
 }
