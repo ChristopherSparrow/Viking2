@@ -3,7 +3,6 @@
 
 @section('content')
 
-
 <h1 style="padding-top:10px"><strong>the Viking Pool League</strong></h1>
 <p>A blackball pool league for Pocklington, Market Weighton and surrounding villages.</p>
 
@@ -137,5 +136,5 @@
         </nav>
     </div>
 </div>
-
+<br>
 @endsection
