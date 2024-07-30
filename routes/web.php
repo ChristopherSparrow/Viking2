@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SeasonController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\CupController;
 use App\Http\Controllers\VikingHomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +45,8 @@ use App\Http\Controllers\VikingHomeController;
 //CUPS
     Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 
-
+//GAMES
+    Route::get('/games/{fixtureId}/{gameId}', [GameController::class, 'index'])->name('games.index');
 
 Auth::routes();
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

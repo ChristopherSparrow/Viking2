@@ -33,4 +33,8 @@ class Season extends Model
     {
     return $this->hasMany(Fixture::class);
     }
+    public function games()
+    {
+    return $this->hasMany(Game::class);
+    }
 }

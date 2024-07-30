@@ -27,16 +27,16 @@
 
         @foreach ($comp_type[$competitionId] == 1 ? $fixtures->sortBy('date')->groupBy('date') : $fixtures->sortByDesc('date')->groupBy('date') as $date => $groupedFixtures)
         @php
-            $firstFixture = $groupedFixtures->first();
-            $comp_round = $firstFixture->comp_round; 
-        @endphp
+        $firstFixture = $groupedFixtures->first();
+        $comp_round = $firstFixture->comp_round; 
+    @endphp
        <div class="col-lg-4">
                 <div class="card shadow p-30 mb-4 bg-white rounded">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         {{ \Carbon\Carbon::parse($date)->format('F j, Y') }}
                         @if(isset($rounds[$comp_round]))
                         |  {{ $rounds[$comp_round] }}
-                        @else
+                     @else
                          
                      @endif
                         @can('update fixture')
@@ -82,7 +82,7 @@
                             @else
                             <tr>
                                 
-                                    @if($comp_type[$competitionId]== 1)<td style="text-align: center; vertical-align: middle;"><a href={{ route('games.index', ['fixtureId' => $fixture->id, 'gameId' => $fixture->id]) }}><i class="bi bi-search">{{ $fixture->id }}</i></a></td> @endif
+                                    @if($comp_type[$competitionId]== 1)<td style="text-align: center; vertical-align: middle;"><i class="bi bi-search"></i></td> @endif
                                 
                                     @if($fixture->home_score > $fixture->away_score)
                                     <td><strong>{{ $teams[$fixture->home_team] }}</strong><br>
